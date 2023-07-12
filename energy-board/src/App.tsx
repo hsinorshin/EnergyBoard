@@ -12,9 +12,9 @@ export default function App() {
 
       <div className="sidenav">
         
-        <FuelTypeList/> <br></br>
+        <button onClick={() => setDisplayBoxContents(<p>Fuel Generation Pie Chart</p>)}>Fuel Generation</button> <br></br>
         
-        <button onClick={() => setDisplayBoxContents(<p>Interconnector Flows BarChart</p>)}>Interconnector Flows</button>
+        <button onClick={() => setDisplayBoxContents(<p>Interconnector Flows Bar Chart</p>)}>Interconnector Flows</button> <br></br>
 
       </div>
 
