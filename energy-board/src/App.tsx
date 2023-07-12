@@ -14,8 +14,11 @@ export default function App() {
         
         <button onClick={() => setDisplayBoxContents(<p>Fuel Generation Pie Chart</p>)}>Fuel Generation</button> <br></br>
         
-        <button onClick={() => setDisplayBoxContents(<p>Interconnector Flows Bar Chart</p>)}>Interconnector Flows</button> <br></br>
 
+        <FuelTypeList/>
+
+
+        <a href="#">Fuel Types</a>
       </div>
 
       {displayBoxContents}
