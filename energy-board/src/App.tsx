@@ -1,77 +1,44 @@
 import './App.css';
+import { useEffect, useState } from 'react';
+import { interFlowsToBarChartData } from './mappers/interFlowsToBarChartData';
+import { BarChart } from './components/BarChart';
 import { FuelTypeList } from './components/FuelTypeList';
-import { useState } from 'react';
-import { getFuelTypes } from './repository/repository';
-import { FuelProfile } from './models/FuelProfileModel';
-import { FuelTypePieChart } from './components/PieChart';
-
+import elexonLogo from "./assets/energyTypes.png";
+import { getCurrentTime } from './helpers/timeFormatter';
+import { emptyBCD } from './models/BarChartData';
 
 export default function App() {
+  const [displayBoxContents, setDisplayBoxContents] = useState(homeDisplay);
+  const [lastUpdated, setLastUpdated] = useState(getCurrentTime());
+  const [interFlowBCD, setInterFlowBCD] = useState(structuredClone(emptyBCD));
 
-  const [displayBoxContents, setDisplayBoxContents] = useState(<p>Welcome to the Elexon EnergyBoard!</p>);
+  useEffect(() => { interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd));
+                    const interval = setInterval(() => {interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd)); setLastUpdated(getCurrentTime());}, 300000);
+                    return () => clearInterval(interval);  
+                  }, []);
 
   return (
     <div className="App">
-      <h1>Elexon EnergyBoard</h1>
 
-      <div className="sidenav">
+      <div className="displayBox">
+        <h1>⚡🔋 Elexon EnergyBoard 🔋⚡</h1> 
         
-        <button onClick={() => setDisplayBoxContents(<p>Fuel Generation Pie Chart</p>)}>Fuel Generation</button> <br></br>
-        
+        {displayBoxContents} <br></br>
 
-        <button onClick={() => DisplayFuelTypes}>Fuel Type</button> <br></br>
-
-
+        <p>Last Updated: {lastUpdated}</p>
       </div>
 
-      {displayBoxContents}
+      <div className="sidenav">
+        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(homeDisplay)}>Home</button> <br></br>
+        
+        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<BarChart bcd={interFlowBCD}/>)}>Interconnector Flows</button> <br></br>
 
+        <button className="sidenavbtn" onClick={() => FuelTypeList}>Fuel Type ** </button> <br></br>        
+      </div>
     </div>
   );
 }
 
-const DisplayFuelTypes =() =>{
-  
-  const [data, setData] = useState([]);
-  
-  getFuelTypes()
-  .then((res) => res.json())
-        .then((actualData) => {
-          console.log(actualData);
-          setData(actualData)
-          console.log(data);
-          console.log("CONGRATULATIONS");
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-
-  
-  return (<>
-  
-  <div className="FuelType">
-    <tr>
-      <td>Fuel Type</td>
-      <td>Current Usage</td>
-      <td>Current Percentage</td>
-    </tr>
-
-    {data.length>0 && data.map(
-      (item: FuelProfile, index) =>(
-        
-        <tr key={index}>
-            <td>{item.fuelType}</td>
-            <td>{item.currentUsage}</td>
-            <td>{item.currentPercentage}</td>
-          </tr>
-      )
-    )}
-      
-      {FuelTypePieChart(data)}
-    
-      
-  </div>
-    
-  </>)
-  
-}
+const homeDisplay = <h3>Welcome to the Elexon EnergyBoard! <br></br> <br></br> 
+                       <img src={elexonLogo} alt="Elexon Logo" width="700" height="400"></img> 
+                    </h3> 
