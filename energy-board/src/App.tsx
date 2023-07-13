@@ -24,8 +24,6 @@ export default function App() {
                   }, []);
   useEffect(()=> {getFuelTypes().then(pcd =>setFuelTypePCD(pcd) )}, []);
 
-  //useefect
-
   return (
     <div className="App">
 
