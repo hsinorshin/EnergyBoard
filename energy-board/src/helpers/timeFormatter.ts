@@ -5,3 +5,8 @@ export function getCurrentTime() {
     let seconds: string = (today.getSeconds() < 10 ? '0' : '') + today.getSeconds();
     return hours + ':' + minutes + ':' + seconds;
 }
+
+export function getTodayDate() {
+    const today: Date = new Date();
+    return today.getFullYear() + '-' + today.getMonth() + '-' + today.getDay();
+}

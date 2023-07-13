@@ -3,3 +3,9 @@ export interface BarChartData {
     chartTitle : string, 
     values : number[]
 }
+
+export const emptyBCD : BarChartData = {
+    categories : [],
+    chartTitle : "",
+    values : [],
+}
