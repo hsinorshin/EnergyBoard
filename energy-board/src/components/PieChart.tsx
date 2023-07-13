@@ -8,7 +8,7 @@ interface PieChartData {
 
 }
 
-const PieApp = (datas: Array<PieChartData>)=> {
+export const PieApp = (props: {pcd : Array<PieChartData>})=> {
     // let chartDatas:Array<object> = [];
     // datas.map((data) => 
     // {
@@ -22,32 +22,30 @@ const PieApp = (datas: Array<PieChartData>)=> {
 
     return (
         <> 
-        hi
         <PieChart width={700} height={700}>
-        <Pie data={datas} dataKey="field2" outerRadius={250} fill="blue" />
+        <Pie data={props.pcd} dataKey="field2" outerRadius={250} fill="blue" />
     </PieChart>
-    hey
     </>
        
     )
 
 }
 
-export const FuelTypePieChart = (datas: Array<FuelProfile>) => {
-    //var pieDatas: Array<PieChartData> = [];
+// export const FuelTypePieChart = (datas: Array<FuelProfile>) => {
+//     //var pieDatas: Array<PieChartData> = [];
 
-    const pieDatas = datas.map((data) => 
-    {
-        return {
-            field1: data.fuelType,
-            field2: data.currentUsage
-        }
-    })
+//     const pieDatas = datas.map((data) => 
+//     {
+//         return {
+//             field1: data.fuelType,
+//             field2: data.currentUsage
+//         }
+//     })
 
-    return PieApp(pieDatas)
+//     return PieApp(pieDatas)
 
 
-}
+// }
 
 
 
