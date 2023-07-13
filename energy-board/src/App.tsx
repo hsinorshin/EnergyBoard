@@ -22,7 +22,6 @@ export default function App() {
         {/* <FuelTypeList/> */}
 
 
-        <a href="#">Fuel Types</a>
       </div>
 
       {displayBoxContents}
