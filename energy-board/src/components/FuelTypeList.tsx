@@ -6,52 +6,52 @@ import { FuelTypePieChart } from "./PieChart";
 
 export const FuelTypeList = () => {
 
-  const [data, setData] = useState([]);
- 
+  
+  
+}
 
- const handleClick = () =>{
+const DisplayFuelTypes =() =>{
+  
+    const [data, setData] = useState([]);
+    
     getFuelTypes()
     .then((res) => res.json())
-         .then((actualData) => {
+          .then((actualData) => {
             console.log(actualData);
             setData(actualData)
             console.log(data);
             console.log("CONGRATULATIONS");
-         })
-         .catch((err) => {
+          })
+          .catch((err) => {
             console.log(err.message);
-         });
-
-  }
-
-  return (<>
-  <button className='button' onClick={handleClick}>
-          Fuel Types
-        </button>
-  <div className="FuelType">
-    <tr>
-      <td>Fuel Type</td>
-      <td>Current Usage</td>
-      <td>Current Percentage</td>
-    </tr>
-
-    {data.length>0 && data.map(
-      (item: FuelProfile, index) =>(
-        
-        <tr key={index}>
-            <td>{item.fuelType}</td>
-            <td>{item.currentUsage}</td>
-            <td>{item.currentPercentage}</td>
-          </tr>
-      )
-    )}
-      
-      {FuelTypePieChart(data)}
-    
-      
-  </div>
-    
-  </>)
+          });
   
-}
-
+    
+    return (<>
+    
+    <div className="FuelType">
+      <tr>
+        <td>Fuel Type</td>
+        <td>Current Usage</td>
+        <td>Current Percentage</td>
+      </tr>
+  
+      {data.length>0 && data.map(
+        (item: FuelProfile, index) =>(
+          
+          <tr key={index}>
+              <td>{item.fuelType}</td>
+              <td>{item.currentUsage}</td>
+              <td>{item.currentPercentage}</td>
+            </tr>
+        )
+      )}
+        
+        {FuelTypePieChart(data)}
+      
+        
+    </div>
+      
+    </>)
+    
+  }
