@@ -1,6 +1,7 @@
 import { BarChartData } from "../models/BarChartData";
+import { getInterFlows } from "../repository/repository";
 
-export function interFlowsToBarChartData(interFlowData : Promise<Response>) {
+export function interFlowsToBarChartData() {
     
     const bcd : BarChartData = {
         categories : [],
@@ -8,8 +9,8 @@ export function interFlowsToBarChartData(interFlowData : Promise<Response>) {
         values : []
     } 
 
-    interFlowData.then((res) => res.json())
-                 .then((data) => {console.log(data);
+    getInterFlows().then((res) => res.json())
+                   .then((data) => {console.log(data);
                                   data.data.map((iFlow: { generation: number; interconnectorName: string; }) => {
                                     bcd.categories.push(iFlow.interconnectorName)
                                     bcd.values.push(iFlow.generation)     
