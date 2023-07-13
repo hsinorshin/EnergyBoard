@@ -4,7 +4,7 @@ import { interFlowsToBarChartData } from './mappers/interFlowsToBarChartData';
 import { BarChart } from './components/BarChart';
 import { FuelTypeList } from './components/FuelTypeList';
 import elexonLogo from "./assets/energyTypes.png";
-import { getCurrentTime } from './helpers/timeFormatter';
+import { getCurrentTime } from './helpers/dateTimeFuncs';
 import { emptyBCD } from './models/BarChartData';
 
 export default function App() {

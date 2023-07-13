@@ -8,5 +8,5 @@ export function getCurrentTime() {
 
 export function getTodayDate() {
     const today: Date = new Date();
-    return today.getFullYear() + '-' + today.getMonth() + '-' + today.getDay();
+    return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() < 10 ? '0' : '') + today.getDate();
 }

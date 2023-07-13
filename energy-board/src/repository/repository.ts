@@ -1,4 +1,4 @@
-import { getTodayDate } from "../helpers/timeFormatter";
+import { getTodayDate } from "../helpers/dateTimeFuncs";
 
 export function getFuelTypes(){
    return fetch('https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/FUELINSTHHCUR')
