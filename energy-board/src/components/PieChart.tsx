@@ -48,3 +48,7 @@ export const FuelTypePieChart = (datas: Array<FuelProfile>) => {
 
 
 }
+
+
+
+
