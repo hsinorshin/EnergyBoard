@@ -1,16 +1,13 @@
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 import { BarChartData } from "../models/BarChartData";
-import {CategoryScale} from 'chart.js';
-
-Chart.register(CategoryScale);
+import 'chart.js/auto'
 
 export function BarChart(props: {bcd : BarChartData}) {
     const data = {
       labels: props.bcd.categories,
       datasets: [
         {
-          title: props.bcd.chartTitle,
           backgroundColor: "rgb(255, 99, 132)",
           borderColor: "rgb(255, 99, 132)",
           data: props.bcd.values,
@@ -19,7 +16,13 @@ export function BarChart(props: {bcd : BarChartData}) {
     };
     return (
       <div>
-        <Bar data={data} />
+        <Bar data={data}
+             options={{plugins:{
+                                title:{ display:true, text:props.bcd.chartTitle,  font:{size:24}},
+                                legend:{ display : false}
+                               }}}
+                          
+        />
       </div>
     );
 };
