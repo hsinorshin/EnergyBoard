@@ -1,11 +1,5 @@
-import { useState } from "react";
-
-
-
-    export function getFuelTypes(){
-    return fetch('https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/FUELINSTHHCUR')
-    
-   
+export function getFuelTypes(){
+   return fetch('https://data.dev.elexon.co.uk/bmrs/api/v1/generation/outturn/FUELINSTHHCUR')
 }
     
 export function getInterFlows() {
