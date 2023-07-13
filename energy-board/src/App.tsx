@@ -13,14 +13,11 @@ export default function App() {
   const [displayBoxContents, setDisplayBoxContents] = useState(homeDisplay);
   const [lastUpdated, setLastUpdated] = useState(getCurrentTime());
   const [interFlowBCD, setInterFlowBCD] = useState(structuredClone(emptyBCD));
-  
 
   useEffect(() => { interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd));
                     const interval = setInterval(() => {interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd)); setLastUpdated(getCurrentTime());}, 300000);
                     return () => clearInterval(interval);  
                   }, []);
-
-  
 
   return (
     <div className="App">
