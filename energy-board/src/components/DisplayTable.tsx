@@ -1,16 +1,20 @@
 import { FuelProfile } from "../models/FuelProfileModel";
 
-export const FuelTypeDisplayTable=(data:Array<FuelProfile>) => {
+interface Props {dtd : Array<FuelProfile> }
+
+export const FuelTypeDisplayTable=({dtd} : Props) => {
 
     return <>
     <div className="FuelType">
-      <tr>
+        <table>
+            <tbody>
+                <tr>
         <td>Fuel Type</td>
-        <td>Current Usage</td>
+        <td>Current Usage/MW</td>
         <td>Current Percentage</td>
       </tr>
   
-      {data.length>0 && data.map(
+      {dtd.length>0 && dtd.map(
         (item: FuelProfile, index) =>(
           
           <tr key={index}>
@@ -20,6 +24,9 @@ export const FuelTypeDisplayTable=(data:Array<FuelProfile>) => {
             </tr>
         )
       )}
+            </tbody>
+        </table>
+      
       
         
     </div>

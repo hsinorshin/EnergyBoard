@@ -4,3 +4,10 @@ export interface FuelProfile {
     currentPercentage: number;
 
   }
+
+  export const emptyFuelProfileArray: Array<FuelProfile> = [{
+    fuelType: "",
+    currentUsage: 0,
+    currentPercentage: 0,
+  }
+]

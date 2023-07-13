@@ -8,19 +8,23 @@ import { emptyBCD } from './models/BarChartData';
 import { PieApp } from './components/PieChart';
 import { FuelTypeToPieChartData } from './mappers/fuelTypeToPieChartData';
 import { getFuelTypes } from './repository/repository';
+import { emptyFuelProfileArray } from './models/FuelProfileModel';
+import { FuelTypeDisplayTable } from './components/DisplayTable';
 
 export default function App() {
   const [displayBoxContents, setDisplayBoxContents] = useState(homeDisplay);
   const [lastUpdated, setLastUpdated] = useState(getCurrentTime());
   const [interFlowBCD, setInterFlowBCD] = useState(structuredClone(emptyBCD));
+  const [fuelTypePCD, setFuelTypePCD] = useState(emptyFuelProfileArray);
   
 
   useEffect(() => { interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd));
                     const interval = setInterval(() => {interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd)); setLastUpdated(getCurrentTime());}, 300000);
                     return () => clearInterval(interval);  
                   }, []);
+  useEffect(()=> {getFuelTypes().then(pcd =>setFuelTypePCD(pcd) )}, []);
 
-  
+  //useefect
 
   return (
     <div className="App">
@@ -38,7 +42,7 @@ export default function App() {
         
         <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<BarChart bcd={interFlowBCD}/>)}>Interconnector Flows</button> <br></br>
 
-        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<PieApp pcd={FuelTypeToPieChartData(getFuelTypes())}/>)}>Fuel Type ** </button> <br></br>        
+        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<><PieApp pcd={FuelTypeToPieChartData(fuelTypePCD)}/>, <FuelTypeDisplayTable dtd={fuelTypePCD}/></>)}>Fuel Type</button> <br></br>        
       </div>
     </div>
   );

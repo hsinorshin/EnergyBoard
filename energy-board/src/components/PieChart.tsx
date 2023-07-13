@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { PieChart, Pie } from "recharts";
 import { FuelProfile } from "../models/FuelProfileModel";
+import { PieChartData } from "../models/PieChartData";
 
-interface PieChartData {
-    field1: string;
-    field2: number; 
 
-}
+interface Props {pcd : Array<PieChartData> }
 
-export const PieApp = (props: {pcd : Array<PieChartData>})=> {
+export const PieApp = ({ pcd }: Props)=> {
     // let chartDatas:Array<object> = [];
     // datas.map((data) => 
     // {
@@ -23,7 +21,7 @@ export const PieApp = (props: {pcd : Array<PieChartData>})=> {
     return (
         <> 
         <PieChart width={700} height={700}>
-        <Pie data={props.pcd} dataKey="field2" outerRadius={250} fill="blue" />
+        <Pie data={pcd} dataKey="field2" outerRadius={250} fill="blue" />
     </PieChart>
     </>
        
