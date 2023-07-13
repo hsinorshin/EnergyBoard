@@ -8,6 +8,8 @@ import { FuelTypeList } from './components/FuelTypeList';
 export default function App() {
   const [displayBoxContents, setDisplayBoxContents] = useState(<p>Welcome to the Elexon EnergyBoard!</p>);
 
+  //const [interConnectorFlowData, setICFData] = useState();
+
   //useEffect(() => {(getInterFlows) =>
   //                 setInterFlowData()}, []);
 
