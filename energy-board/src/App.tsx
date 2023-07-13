@@ -8,8 +8,8 @@ import { FuelTypeList } from './components/FuelTypeList';
 export default function App() {
   const [displayBoxContents, setDisplayBoxContents] = useState(<p>Welcome to the Elexon EnergyBoard!</p>);
 
-  //const [interConnectorFlowData, setICFData] = useState();
-
+  //useEffect(() => {(getInterFlows) =>
+  //                 setInterFlowData()}, []);
   //useEffect(() => {(getInterFlows) =>
   //                 setInterFlowData()}, []);
 
@@ -21,6 +21,9 @@ export default function App() {
         
         <button onClick={() => setDisplayBoxContents(<p>Fuel Generation Pie Chart</p>)}>Fuel Generation</button> <br></br>
         
+        <button onClick={() => setDisplayBoxContents(<p>Fuel Generation Pie Chart</p>)}>Fuel Generation</button> <br></br>
+        
+        <button onClick={() => setDisplayBoxContents(<BarChart bcd={interFlowsToBarChartData(getInterFlows())}/>)}>Interconnector Flows</button> <br></br>
 
         <button onClick={() => FuelTypeList}>Fuel Type ** </button> <br></br>
 
@@ -35,6 +38,7 @@ export default function App() {
       <div>
         {displayBoxContents}
       </div>
+
 
     </div>
   );
