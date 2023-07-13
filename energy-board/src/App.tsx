@@ -16,7 +16,11 @@ export default function App() {
         
         <button onClick={() => setDisplayBoxContents(<p>Interconnector Flows Bar Chart</p>)}>Interconnector Flows</button> <br></br>
 
-        <FuelTypeList/>
+        <button onClick={() => FuelTypeList}>Fuel Type ** </button> <br></br>
+
+        
+
+        {/* <FuelTypeList/> */}
 
 
       </div>
@@ -25,4 +29,8 @@ export default function App() {
 
     </div>
   );
+}
+
+function GetFuelType(){
+  return null;
 }
