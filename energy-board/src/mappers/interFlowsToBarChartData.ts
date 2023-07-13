@@ -10,7 +10,7 @@ export function interFlowsToBarChartData() {
     } 
 
     getInterFlows().then((res) => res.json())
-                   .then((data) => {console.log(data);
+                 .then((data) => {console.log(data);
                                   data.data.map((iFlow: { generation: number; interconnectorName: string; }) => {
                                     bcd.categories.push(iFlow.interconnectorName)
                                     bcd.values.push(iFlow.generation)     
