@@ -15,7 +15,11 @@ export default function App() {
         <button onClick={() => setDisplayBoxContents(<p>Fuel Generation Pie Chart</p>)}>Fuel Generation</button> <br></br>
         
 
-        <FuelTypeList/>
+        <button onClick={() => FuelTypeList}>Fuel Type ** </button> <br></br>
+
+        
+
+        {/* <FuelTypeList/> */}
 
 
         <a href="#">Fuel Types</a>
@@ -25,4 +29,8 @@ export default function App() {
 
     </div>
   );
+}
+
+function GetFuelType(){
+  return null;
 }

@@ -1,14 +1,10 @@
+import { FuelProfile } from "../models/FuelProfileModel";
 import { getFuelTypes } from "../repository/repository";
 import { useEffect, useState } from "react";
+import { FuelTypePieChart } from "./PieChart";
 
 
 export const FuelTypeList = () => {
-  interface FuelProfile {
-    fuelType: string;
-    currentUsage: number;
-    currentPercentage: number;
-
-  }
 
   const [data, setData] = useState([]);
  
@@ -49,6 +45,9 @@ export const FuelTypeList = () => {
           </tr>
       )
     )}
+      
+      {FuelTypePieChart(data)}
+    
       
   </div>
     
