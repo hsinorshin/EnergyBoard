@@ -1,6 +1,6 @@
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-import { BarChartData } from "../models/BarChartData";
+import { BarChartData } from "../models/InterFlowsPageData";
 import 'chart.js/auto'
 
 export function BarChart(props: {bcd : BarChartData}) {
