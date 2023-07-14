@@ -41,7 +41,6 @@ export default function App() {
         <h1>⚡🔋 Elexon EnergyBoard 🔋⚡</h1> 
         
         {displayBoxContents} <br></br>
-
       </div>
 
       <div className='footer'> 
