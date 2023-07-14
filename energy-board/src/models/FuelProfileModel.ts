@@ -2,6 +2,8 @@ export interface FuelProfile {
     fuelType: string;
     currentUsage: number;
     currentPercentage: number;
+    twentyFourHourUsage: number;
+    twentyFourHourPercentage: number;
 
   }
 
@@ -9,5 +11,8 @@ export interface FuelProfile {
     fuelType: "",
     currentUsage: 0,
     currentPercentage: 0,
+    twentyFourHourUsage:0 ,
+    twentyFourHourPercentage: 0,
+
   }
 ]

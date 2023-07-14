@@ -4,9 +4,9 @@ import { FuelProfile } from "../models/FuelProfileModel";
 import { PieChartData } from "../models/PieChartData";
 
 
-interface Props {pcd : Array<PieChartData>; chartTitle: string}
+interface Props {pcd : Array<PieChartData>; period: string; chartTitle: string;}
 
-export const PieApp = ({ pcd, chartTitle}: Props)=> {
+export const PieApp = ({ pcd, period, chartTitle}: Props)=> {
     // let chartDatas:Array<object> = [];
     // datas.map((data) => 
     // 
@@ -21,8 +21,7 @@ export const PieApp = ({ pcd, chartTitle}: Props)=> {
         <> 
         <div className="pieChart">
         <span>
-            
-            {chartTitle}
+            {chartTitle} for past {period}
         </span>
         <PieChart width={700} height={700} >
         <Pie data={pcd} dataKey="field2" outerRadius={250} fill="#d0bdf4"  cx="50%"

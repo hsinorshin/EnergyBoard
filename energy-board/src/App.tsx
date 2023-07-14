@@ -9,6 +9,8 @@ import { FuelTypeToPieChartData } from './mappers/fuelTypeToPieChartData';
 import { getFuelTypes } from './repository/repository';
 import { emptyFuelProfileArray } from './models/FuelProfileModel';
 import { FuelTypeDisplayTable } from './components/DisplayTable';
+import { DropDown } from './components/DropDown';
+import { DisplayCharts } from './components/DisplayCharts';
 import { getCurrentTime, getTimeToNextUpdate, updateInterval } from './helpers/dateTimeFuncs';
 
 export default function App() {
@@ -19,6 +21,7 @@ export default function App() {
 
   const [interFlowBCD, setInterFlowBCD] = useState(structuredClone(emptyBCD));
   const [fuelTypePCD, setFuelTypePCD] = useState(emptyFuelProfileArray);
+
   
 
   useEffect(() => { reloadData();
@@ -54,14 +57,10 @@ export default function App() {
         
         <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<BarChart bcd={interFlowBCD}/>)}>Interconnector Flows</button> <br></br>
 
-        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<><label htmlFor="displayperiod">Usage Period : </label>
-  <select name="displayperiod" id="displayperiod">
-    <option value="30min">Now</option>
-    <option value="24hours">24hours</option>
-  </select>,<PieApp pcd={FuelTypeToPieChartData(fuelTypePCD)} chartTitle="Fuel Usage by GW"/>, <FuelTypeDisplayTable dtd={fuelTypePCD}/></>)}>Fuel Type</button> <br></br>        
+        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<><DisplayCharts filters={[[]]} data={fuelTypePCD}/></>)}> Display Charts </button> <br></br>
       </div>
     </div>
-  );
+  ); 
 }
 
 const homeDisplay = <h3>Welcome to the Elexon EnergyBoard! <br></br> <br></br> 
