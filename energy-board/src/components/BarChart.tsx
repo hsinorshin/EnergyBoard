@@ -4,16 +4,19 @@ import { BarChartData } from "../models/BarChartData";
 import 'chart.js/auto'
 
 export function BarChart(props: {bcd : BarChartData}) {
+    const backgroundColouring = props.bcd.values.map(val => val >= 0 ? "rgb(0, 153, 0)" : "rgb(255, 0, 0)")
+
     const data = {
       labels: props.bcd.categories,
       datasets: [
         {
-          backgroundColor: "rgb(255, 99, 132)",
+          backgroundColor: backgroundColouring,
           borderColor: "rgb(255, 99, 132)",
           data: props.bcd.values,
         },
       ],
     };
+
     return (
       <div>
         <Bar data={data}
@@ -26,3 +29,4 @@ export function BarChart(props: {bcd : BarChartData}) {
       </div>
     );
 };
+
