@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { interFlowsToBarChartData } from './mappers/interFlowsToBarChartData';
 import { BarChart } from './components/BarChart';
 import elexonLogo from "./assets/energyTypes.png";
-import { getCurrentTime } from './helpers/timeFormatter';
 import { emptyBCD } from './models/BarChartData';
 import { PieApp } from './components/PieChart';
 import { FuelTypeToPieChartData } from './mappers/fuelTypeToPieChartData';
@@ -12,19 +11,31 @@ import { emptyFuelProfileArray } from './models/FuelProfileModel';
 import { FuelTypeDisplayTable } from './components/DisplayTable';
 import { DropDown } from './components/DropDown';
 import { DisplayCharts } from './components/DisplayCharts';
+import { getCurrentTime, getTimeToNextUpdate, updateInterval } from './helpers/dateTimeFuncs';
 
 export default function App() {
   const [displayBoxContents, setDisplayBoxContents] = useState(homeDisplay);
+
   const [lastUpdated, setLastUpdated] = useState(getCurrentTime());
+  const [timeToNextUpdate, setTimeToNextUpdate] = useState(getTimeToNextUpdate(lastUpdated));
+
   const [interFlowBCD, setInterFlowBCD] = useState(structuredClone(emptyBCD));
   const [fuelTypePCD, setFuelTypePCD] = useState(emptyFuelProfileArray);
 
   
 
-  useEffect(() => { interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd)); getFuelTypes().then(pcd =>setFuelTypePCD(pcd)); 
-                    const interval = setInterval(() => {interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd)); setLastUpdated(getCurrentTime());}, 300000);
+  useEffect(() => { reloadData();
+                    const interval = setInterval(() => {reloadData();}, updateInterval);
                     return () => clearInterval(interval);  
                   }, []);
+
+  useEffect(() => {const timer = setTimeout(() => {setTimeToNextUpdate(getTimeToNextUpdate(lastUpdated));}, 1000);});
+
+  function reloadData() {
+    interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd));
+    getFuelTypes().then(pcd =>setFuelTypePCD(pcd));
+    setLastUpdated(getCurrentTime());
+  }
 
   return (
     <div className="App">
@@ -33,9 +44,12 @@ export default function App() {
         <h1>⚡🔋 Elexon EnergyBoard 🔋⚡</h1> 
         
         {displayBoxContents} <br></br>
- 
+      </div>
 
-        <p>Last Updated: {lastUpdated}</p>
+      <div className='footer'> 
+          Last Updated: {lastUpdated} &emsp; &emsp;  &emsp; &emsp;  &emsp; 
+          Time to Next Update: {timeToNextUpdate} &emsp; &emsp;  &emsp; &emsp;  &emsp; 
+          <button onClick={reloadData}>Manual Update</button>
       </div>
 
       <div className="sidenav">
