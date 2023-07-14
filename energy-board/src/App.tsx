@@ -22,7 +22,9 @@ export default function App() {
                     const interval = setInterval(() => {interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd)); setLastUpdated(getCurrentTime());}, 300000);
                     return () => clearInterval(interval);  
                   }, []);
-  useEffect(()=> {getFuelTypes().then(pcd =>setFuelTypePCD(pcd) )}, []);
+  useEffect(()=> {getFuelTypes().then(pcd =>setFuelTypePCD(pcd));
+                  const interval= setInterval(() => {getFuelTypes().then(pcd => setFuelTypePCD(pcd)); setLastUpdated(getCurrentTime());}, 300000);
+  }, []);
 
   return (
     <div className="App">
@@ -32,6 +34,7 @@ export default function App() {
         
         {displayBoxContents} <br></br>
 
+        
         <p>Last Updated: {lastUpdated}</p>
       </div>
 
@@ -40,7 +43,11 @@ export default function App() {
         
         <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<BarChart bcd={interFlowBCD}/>)}>Interconnector Flows</button> <br></br>
 
-        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<><PieApp pcd={FuelTypeToPieChartData(fuelTypePCD)}/>, <FuelTypeDisplayTable dtd={fuelTypePCD}/></>)}>Fuel Type</button> <br></br>        
+        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<><label htmlFor="displayperiod">Usage Period : </label>
+  <select name="displayperiod" id="displayperiod">
+    <option value="30min">Now</option>
+    <option value="24hours">24hours</option>
+  </select>,<PieApp pcd={FuelTypeToPieChartData(fuelTypePCD)} chartTitle="Fuel Usage by GW"/>, <FuelTypeDisplayTable dtd={fuelTypePCD}/></>)}>Fuel Type</button> <br></br>        
       </div>
     </div>
   );
