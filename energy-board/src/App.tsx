@@ -1,15 +1,16 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { interFlowsToBarChartData } from './mappers/interFlowsToBarChartData';
 import { BarChart } from './components/BarChart';
 import elexonLogo from "./assets/energyTypes.png";
-import { emptyBCD } from './models/BarChartData';
+import { emptyBCD, emptyIFPD } from './models/InterFlowsPageData';
 import { PieApp } from './components/PieChart';
 import { FuelTypeToPieChartData } from './mappers/fuelTypeToPieChartData';
 import { getFuelTypes } from './repository/repository';
 import { emptyFuelProfileArray } from './models/FuelProfileModel';
 import { FuelTypeDisplayTable } from './components/DisplayTable';
 import { getCurrentTime, getTimeToNextUpdate, updateInterval } from './helpers/dateTimeFuncs';
+import { InterFlowPage } from './components/InterFlowPage';
+import { interFlowsToPageData } from './mappers/interFlowsToPageData';
 
 export default function App() {
   const [displayBoxContents, setDisplayBoxContents] = useState(homeDisplay);
@@ -17,7 +18,6 @@ export default function App() {
   const [lastUpdated, setLastUpdated] = useState(getCurrentTime());
   const [timeToNextUpdate, setTimeToNextUpdate] = useState(getTimeToNextUpdate(lastUpdated));
 
-  const [interFlowBCD, setInterFlowBCD] = useState(structuredClone(emptyBCD));
   const [fuelTypePCD, setFuelTypePCD] = useState(emptyFuelProfileArray);
   
 
@@ -29,7 +29,6 @@ export default function App() {
   useEffect(() => {const timer = setTimeout(() => {setTimeToNextUpdate(getTimeToNextUpdate(lastUpdated));}, 1000);});
 
   function reloadData() {
-    interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd));
     getFuelTypes().then(pcd =>setFuelTypePCD(pcd));
     setLastUpdated(getCurrentTime());
   }
@@ -52,7 +51,7 @@ export default function App() {
       <div className="sidenav">
         <button className="sidenavbtn" onClick={() => setDisplayBoxContents(homeDisplay)}>Home</button> <br></br>
         
-        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<BarChart bcd={interFlowBCD}/>)}>Interconnector Flows</button> <br></br>
+        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<InterFlowPage/>)}>Interconnector Flows</button> <br></br>
 
         <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<><label htmlFor="displayperiod">Usage Period : </label>
   <select name="displayperiod" id="displayperiod">
