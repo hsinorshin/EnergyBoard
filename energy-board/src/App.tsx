@@ -11,13 +11,14 @@ import { getFuelTypes } from './repository/repository';
 import { emptyFuelProfileArray } from './models/FuelProfileModel';
 import { FuelTypeDisplayTable } from './components/DisplayTable';
 import { DropDown } from './components/DropDown';
+import { DisplayCharts } from './components/DisplayCharts';
 
 export default function App() {
   const [displayBoxContents, setDisplayBoxContents] = useState(homeDisplay);
   const [lastUpdated, setLastUpdated] = useState(getCurrentTime());
   const [interFlowBCD, setInterFlowBCD] = useState(structuredClone(emptyBCD));
   const [fuelTypePCD, setFuelTypePCD] = useState(emptyFuelProfileArray);
-  const [displayPeriod, setDisplayPeriod] = useState("now");
+
   
 
   useEffect(() => { interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd)); getFuelTypes().then(pcd =>setFuelTypePCD(pcd)); 
@@ -42,9 +43,7 @@ export default function App() {
         
         <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<BarChart bcd={interFlowBCD}/>)}>Interconnector Flows</button> <br></br>
 
-        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<><DropDown setPeriodFunction={setDisplayPeriod}/>, 
-
-        <PieApp pcd={FuelTypeToPieChartData(fuelTypePCD)} period={displayPeriod} chartTitle="Fuel Usage by GW"/>, <FuelTypeDisplayTable dtd={fuelTypePCD}/></>)}>Fuel Type</button> <br></br>        
+        <button className="sidenavbtn" onClick={() => setDisplayBoxContents(<><DisplayCharts filters={[[]]} data={fuelTypePCD}/></>)}> Display Charts </button> <br></br>
       </div>
     </div>
   ); 

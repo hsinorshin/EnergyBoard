@@ -96,7 +96,7 @@ tr:nth-child(even) {
 .pieChart {
   float: left;
   font-weight: 600;
-  font-size: 25px;
+  font-size: 10px;
 }
 
 .footer {

@@ -21,8 +21,7 @@ export const PieApp = ({ pcd, period, chartTitle}: Props)=> {
         <> 
         <div className="pieChart">
         <span>
-            You got {period}
-            {chartTitle}
+            {chartTitle} for past {period}
         </span>
         <PieChart width={700} height={700} >
         <Pie data={pcd} dataKey="field2" outerRadius={250} fill="#d0bdf4"  cx="50%"

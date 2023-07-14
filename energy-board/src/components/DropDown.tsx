@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-interface Props {setPeriodFunction: React.Dispatch<React.SetStateAction<string>> ; valuelist: Array<string>}
+interface Props {setPeriodFunction: React.Dispatch<React.SetStateAction<string>> ; valuelist: string[]}
 
 export const DropDown = ({setPeriodFunction, valuelist} :Props) => {
     return(
@@ -10,7 +10,7 @@ export const DropDown = ({setPeriodFunction, valuelist} :Props) => {
 
           {valuelist.length>0 && valuelist.map(
         (value: string, index) =>(
-          <option value={value}>value</option>
+          <option value={value}>{value}</option>
         )
       )} 
 
