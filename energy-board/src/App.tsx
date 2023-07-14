@@ -21,15 +21,18 @@ export default function App() {
   const [fuelTypePCD, setFuelTypePCD] = useState(emptyFuelProfileArray);
   
 
-  useEffect(() => { interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd));
-                    getFuelTypes().then(pcd =>setFuelTypePCD(pcd));
-                    const interval = setInterval(() => {interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd)); 
-                                                        setLastUpdated(getCurrentTime());
-                                                        getFuelTypes().then(pcd => setFuelTypePCD(pcd));}, updateInterval);
+  useEffect(() => { reloadData();
+                    const interval = setInterval(() => {reloadData();}, updateInterval);
                     return () => clearInterval(interval);  
                   }, []);
 
   useEffect(() => {const timer = setTimeout(() => {setTimeToNextUpdate(getTimeToNextUpdate(lastUpdated));}, 1000);});
+
+  function reloadData() {
+    interFlowsToBarChartData().then(bcd => setInterFlowBCD(bcd));
+    getFuelTypes().then(pcd =>setFuelTypePCD(pcd));
+    setLastUpdated(getCurrentTime());
+  }
 
   return (
     <div className="App">
@@ -41,7 +44,11 @@ export default function App() {
 
       </div>
 
-      <div className='footer'> Last Updated: {lastUpdated} &emsp; &emsp;  &emsp; Time to Next Update: {timeToNextUpdate}</div>
+      <div className='footer'> 
+          Last Updated: {lastUpdated} &emsp; &emsp;  &emsp; &emsp;  &emsp; 
+          Time to Next Update: {timeToNextUpdate} &emsp; &emsp;  &emsp; &emsp;  &emsp; 
+          <button onClick={reloadData}>Manual Update</button>
+      </div>
 
       <div className="sidenav">
         <button className="sidenavbtn" onClick={() => setDisplayBoxContents(homeDisplay)}>Home</button> <br></br>
