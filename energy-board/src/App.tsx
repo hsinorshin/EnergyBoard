@@ -41,7 +41,6 @@ export default function App() {
         <h1>⚡🔋 Elexon EnergyBoard 🔋⚡</h1> 
         
         {displayBoxContents} <br></br>
-
       </div>
 
       <div className='footer'> 
@@ -49,6 +48,8 @@ export default function App() {
           Time to Next Update: {timeToNextUpdate} &emsp; &emsp;  &emsp; &emsp;  &emsp; 
           <button onClick={reloadData}>Manual Update</button>
       </div>
+
+      <div className='footer'> Last Updated: {lastUpdated} &emsp; &emsp;  &emsp; Time to Next Update: {timeToNextUpdate}</div>
 
       <div className="sidenav">
         <button className="sidenavbtn" onClick={() => setDisplayBoxContents(homeDisplay)}>Home</button> <br></br>
