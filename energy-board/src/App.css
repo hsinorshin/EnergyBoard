@@ -105,10 +105,16 @@ tr:nth-child(even) {
   left: 0;
   bottom: 0;
   height: 50px;
-  width: 100%;
   overflow: hidden;
   text-align: center;
   line-height: 50px;
+  margin-left: 150px;
+  width: 100%;
+}
+
+.footer button {
+  height: 30px;
+  font-size: medium;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
