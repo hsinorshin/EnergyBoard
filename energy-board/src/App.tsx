@@ -63,5 +63,5 @@ export default function App() {
 }
 
 const homeDisplay = <h3>Welcome to the Elexon EnergyBoard! <br></br> <br></br> 
-                       <img src={elexonLogo} alt="Elexon Logo" width="700" height="400"></img> 
+                       <img src={elexonLogo} alt="Elexon Logo" width="1000" height="500"></img> 
                     </h3> 
